@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 ############################################################################
 # Copyright (c) 2019                                                       #
@@ -8,35 +8,54 @@
 ############################################################################
 
 DESCRIPTION="Reserved for future use."
-LICENSE="MIT"
-AUTHORS='["Matthieu Le brazidec <matthieu@lebrazidec.email>"]'
-HOMEPAGE="https://github.com/azastrael"
+VERSION="0.0.0"
+HOMEPAGE="https://jesus.gg/"
+KEYWORDS="[]"
+CATEGORIES="[]"
+LICENSE_FILE="LICENSE.txt"
+LICENSE="\
+###########################################################################################
+# Copyright (c) 2019                                                                      #
+# All Rights Reserved to Matthieu Le brazidec                                             #
+# Unauthorized copying of any file in this project, via any medium is strictly prohibited #
+# Proprietary and confidential                                                            #
+###########################################################################################"
+README_FILE="README.md"
+README="\
+# {{NAME}}
+
+$DESCRIPTION
+
+## LICENSE
+
+\`\`\`
+$LICENSE
+\`\`\`"
+AUTHORS='["Matthieu Le brazidec (r3v2d0g) <r3v2d0g@jesus.gg>"]'
 
 base=$(pwd)
 
-echo ''
-echo '###########################################################################################'
-echo '# Copyright (c) 2019                                                                      #'
-echo '# All Rights Reserved to Matthieu Le brazidec                                             #'
-echo '# Unauthorized copying of any file in this project, via any medium is strictly prohibited #'
-echo '# Proprietary and confidential                                                            #'
-echo '###########################################################################################'
-echo ''
+echo $LICENSE
 
 for pkg in $*; do
 	mkdir -p $pkg/src
 	cd $pkg
 
-	touch Cargo.toml
-	touch src/lib.rs
+	echo "$README" | sed "s/{{NAME}}/$pkg/g" >> $README_FILE
+	echo "$LICENSE" >> $LICENSE_FILE
+	cat $README_FILE | sed 's/^/\/\/! /' >> src/lib.rs
 
 	echo '[package]' >> Cargo.toml
-	echo "name        = \"$pkg\"" >> Cargo.toml
-	echo 'version     = "0.0.0"' >> Cargo.toml
+	echo "name = \"$pkg\"" >> Cargo.toml
 	echo "description = \"$DESCRIPTION\"" >> Cargo.toml
-	echo "license     = \"MIT\"" >> Cargo.toml
-	echo "authors     = $AUTHORS" >> Cargo.toml
-	echo "homepage    = \"$HOMEPAGE\"" >> Cargo.toml
+	echo "version = \"$VERSION\"" >> Cargo.toml
+	echo "homepage = \"$HOMEPAGE\"" >> Cargo.toml
+	echo "keywords = $KEYWORDS" >> Cargo.toml
+	echo "categories = $CATEGORIES" >> Cargo.toml
+	echo "license-file = \"$LICENSE_FILE\"" >> Cargo.toml
+	echo "readme = \"$README_FILE\"" >> Cargo.toml
+	echo "authors = $AUTHORS" >> Cargo.toml
+	echo "edition = \"2018\"" >> Cargo.toml
 
 	cargo publish --allow-dirty
 
