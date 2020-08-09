@@ -49,8 +49,8 @@ for pkg in $*; do
 	echo "authors = $AUTHORS" >> Cargo.toml
 	echo "edition = \"2018\"" >> Cargo.toml
 
-	#cargo publish --allow-dirty
+	cargo publish --allow-dirty
 
 	cd $base
-	#rm -r $pkg
+	rm -r $pkg
 done
