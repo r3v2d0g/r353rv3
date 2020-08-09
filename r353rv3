@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ############################################################################
-# Copyright (c) 2019                                                       #
+# Copyright (c) 2020                                                       #
 # All Rights Reserved to Matthieu Le brazidec                              #
 # Unauthorized copying of this file, via any medium is strictly prohibited #
 # Proprietary and confidential                                             #
@@ -13,13 +13,8 @@ HOMEPAGE="https://jesus.gg/"
 KEYWORDS="[]"
 CATEGORIES="[]"
 LICENSE_FILE="LICENSE.txt"
-LICENSE="\
-###########################################################################################
-# Copyright (c) 2019                                                                      #
-# All Rights Reserved to Matthieu Le brazidec                                             #
-# Unauthorized copying of any file in this project, via any medium is strictly prohibited #
-# Proprietary and confidential                                                            #
-###########################################################################################"
+LICENSE_TYPE="MPL-2.0"
+LICENSE=$(cat "MPL-2.0.txt")
 README_FILE="README.md"
 README="\
 # {{NAME}}
@@ -28,14 +23,20 @@ $DESCRIPTION
 
 ## LICENSE
 
-\`\`\`
-$LICENSE
-\`\`\`"
+> This Source Code Form is subject to the terms of the Mozilla Public
+> License, v. 2.0. If a copy of the MPL was not distributed with this
+> file, You can obtain one at http://mozilla.org/MPL/2.0/."
 AUTHORS='["Matthieu Le brazidec (r3v2d0g) <r3v2d0g@jesus.gg>"]'
 
 base=$(pwd)
 
-echo $LICENSE
+echo "\
+###########################################################################################
+# Copyright (c) 2020                                                                      #
+# All Rights Reserved to Matthieu Le brazidec                                             #
+# Unauthorized copying of any file in this project, via any medium is strictly prohibited #
+# Proprietary and confidential                                                            #
+###########################################################################################"
 
 for pkg in $*; do
 	mkdir -p $pkg/src
@@ -52,7 +53,7 @@ for pkg in $*; do
 	echo "homepage = \"$HOMEPAGE\"" >> Cargo.toml
 	echo "keywords = $KEYWORDS" >> Cargo.toml
 	echo "categories = $CATEGORIES" >> Cargo.toml
-	echo "license-file = \"$LICENSE_FILE\"" >> Cargo.toml
+	echo "license = \"$LICENSE_TYPE\"" >> Cargo.toml
 	echo "readme = \"$README_FILE\"" >> Cargo.toml
 	echo "authors = $AUTHORS" >> Cargo.toml
 	echo "edition = \"2018\"" >> Cargo.toml
