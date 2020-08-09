@@ -1,10 +1,15 @@
 # r353rv3
 
-## Copyright
+Easily reserve crate names on `crates.io`.
 
+
+## Usage
+
+```bash
+./r353rv3 [name]...
 ```
-Copyright (c) 2019
-All Rights Reserved to Matthieu Le brazidec
-Unauthorized copying of any file in this project, via any medium is strictly prohibited
-Proprietary and confidential
-```
+
+
+## License
+
+> This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <http://mozilla.org/MPL/2.0/>.

@@ -1,42 +1,33 @@
-#!/bin/zsh
+#!/bin/bash
 
-############################################################################
-# Copyright (c) 2020                                                       #
-# All Rights Reserved to Matthieu Le brazidec                              #
-# Unauthorized copying of this file, via any medium is strictly prohibited #
-# Proprietary and confidential                                             #
-############################################################################
+################################################################################
+# This Source Code Form is subject to the terms of the Mozilla Public          #
+# License, v. 2.0. If a copy of the MPL was not distributed with this          #
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.                     #
+################################################################################
 
 DESCRIPTION="Reserved for future use."
 VERSION="0.0.0"
 HOMEPAGE="https://jesus.gg/"
 KEYWORDS="[]"
 CATEGORIES="[]"
+AUTHORS="[\"$(git config user.name) <$(git config user.email)>\"]"
 LICENSE_FILE="LICENSE.txt"
 LICENSE_TYPE="MPL-2.0"
-LICENSE=$(cat "MPL-2.0.txt")
+LICENSE=$(cat "LICENSE.txt")
 README_FILE="README.md"
 README="\
 # {{NAME}}
 
 $DESCRIPTION
 
-## LICENSE
+## License
 
 > This Source Code Form is subject to the terms of the Mozilla Public
 > License, v. 2.0. If a copy of the MPL was not distributed with this
 > file, You can obtain one at http://mozilla.org/MPL/2.0/."
-AUTHORS='["Matthieu Le brazidec (r3v2d0g) <r3v2d0g@jesus.gg>"]'
 
 base=$(pwd)
-
-echo "\
-###########################################################################################
-# Copyright (c) 2020                                                                      #
-# All Rights Reserved to Matthieu Le brazidec                                             #
-# Unauthorized copying of any file in this project, via any medium is strictly prohibited #
-# Proprietary and confidential                                                            #
-###########################################################################################"
 
 for pkg in $*; do
 	mkdir -p $pkg/src
@@ -58,8 +49,8 @@ for pkg in $*; do
 	echo "authors = $AUTHORS" >> Cargo.toml
 	echo "edition = \"2018\"" >> Cargo.toml
 
-	cargo publish --allow-dirty
+	#cargo publish --allow-dirty
 
 	cd $base
-	rm -r $pkg
+	#rm -r $pkg
 done
